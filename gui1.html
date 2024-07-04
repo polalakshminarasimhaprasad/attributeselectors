@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp-like Chat UI</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #32328d;
+  }
+
+  .sidebar {
+    width: 25%;
+    background-color: #5a6d80;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 20px;
+    background-color: #132e49;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 1px solid #2c3e50;
+  }
+
+  .chat-list {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .chat-list .chat-item {
+    padding: 15px;
+    border-bottom: 1px solid #0b7ae9;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .chat-list .chat-item:hover {
+    background-color: #e1e6eb;
+  }
+
+  .chat-window {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .chat-header {
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .messages-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .date-header {
+    background-color: #20d2d8;
+    color: #8fa512;
+    padding: 10px;
+    font-size: 0.9em;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 10px;
+    width: 60px;
+    z-index: 1;
+    align-self: center;
+  }
+
+  .messages {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 60%;
+    position: relative;
+    word-wrap: break-word;
+  }
+
+  .message.user {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .message.bot {
+    background-color: #ffffff;
+    align-self: flex-start;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .message::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .message.user::after {
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #dcf8c6;
+    right: -10px;
+    top: 10px;
+  }
+
+  .message.bot::after {
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #ffffff transparent transparent;
+    left: -10px;
+    top: 10px;
+  }
+
+  .input-container {
+    display: flex;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+  }
+
+  .input-container input[type="text"] {
+    flex-grow: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .input-container input[type="text"]:focus {
+    border-color: #007bff;
+  }
+
+  .input-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+  }
+
+  .input-container button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-header">Chats</div>
+    <div class="chat-list">
+      <div class="chat-item">Chat 1</div>
+      <div class="chat-item">Chat 2</div>
+      <div class="chat-item">Chat 3</div>
+      <div class="chat-item">Chat 4</div>
+      <div class="chat-item">Chat 5</div>
+      <div class="chat-item">Chat 6</div>
+      <div class="chat-item">Chat 7</div>
+      <div class="chat-item">Chat 8</div>
+      <div class="chat-item">Chat 9</div>
+      <div class="chat-item">Chat 10</div>
+      <div class="chat-item">Chat 11</div>
+      <div class="chat-item">Chat 12</div>
+      <div class="chat-item">Chat 13</div>
+      <div class="chat-item">Chat 14</div>
+      <div class="chat-item">Chat 15</div>
+    </div>
+  </div>
+  
+  <div class="chat-window">
+    <div class="chat-header">Chat with Bot</div>
+    <div class="messages-container">
+      <div class="date-header">Yesterday</div>
+      <div class="messages">
+        <div class="message bot">Hello! How can I help you today?</div>
+        <div class="message user">Hi! I need some assistance.</div>
+        <div class="message bot">Sure, what do you need help with?</div>
+        <div class="message user">I have a question about my account.</div>
+        <div class="message bot">Hello! How can I help you today?</div>
+        <div class="message user">Hi! I need some assistance.</div>
+        <div class="message bot">Sure, what do you need help with?</div>
+        <div class="message user">I have a question about my account.</div>
+        <div class="message bot">Hello! How can I help you today?</div>
+        <div class="message user">Hi! I need some assistance.</div>
+        <div class="message bot">Sure, what do you need help with?</div>
+        <div class="message user">I have a question about my account.</div>
+        <div class="message bot">Hello! How can I help you today?</div>
+        <div class="message user">Hi! I need some assistance.</div>
+        <div class="message bot">Sure, what do you need help with?</div>
+        <div class="message user">I have a question about my account.</div>
+      </div>
+      <div class="date-header">Today</div>
+      <div class="messages">
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+        <div class="message bot">How can I assist you further?</div>
+        <div class="message user">That's all for now, thank you!</div>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" placeholder="Type a message...">
+      <button>Send</button>
+    </div>
+  </div>
+</body>
+</html>
